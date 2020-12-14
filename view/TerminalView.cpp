@@ -1,6 +1,5 @@
 #include "TerminalView.h"
 #include <utility>
-#include "../utility/FileManager.h"
 
 VM::TerminalView::TerminalView(std::shared_ptr<Terminal> terminal) : View{std::move(terminal)} {}
 
@@ -8,6 +7,11 @@ void VM::TerminalView::updateView(WindowState *state) {
     drawEmptyLines();
     int rowOffset = state->getOffset();
     std::pair<int, int> screenSize = terminal->getWindowSize(FILEWINDOW);
+    std::pair<int, int> cursor = state->getCursor();
+    std::string cursorInformation = "[" + std::to_string(cursor.first + 1) + ", " + std::to_string(cursor.second + 1) + "]";
+    terminal->moveCursorInTerminal(STATUSBAR, {0, terminal->getWindowSize(STATUSBAR).second - cursorInformation.length() - 5});
+    terminal->printString(STATUSBAR, cursorInformation);
+    terminal->moveCursorInTerminal(FILEWINDOW, {0, 0});
     int rowsPrinted = 0;
     int row = rowOffset;
     bool didNotFit = false;
@@ -30,21 +34,6 @@ void VM::TerminalView::updateView(WindowState *state) {
         }
         terminal->stopColoredOutput(FILEWINDOW);
     }
-
-    /*if (!state->getFileName().empty() && model.getMode() == NORMAL_MODE) {
-        std::string toPrint = "\"" + state->getFileName() + "\"";
-        if (!state->isOriginalFile()) {
-            std::pair<int, int> fileInfo = state->getFileInfo();
-            std::string coordinates = std::to_string(fileInfo.first) + "L, " + std::to_string(fileInfo.second) + "C";
-            toPrint += "     " + coordinates;
-        } else if (state->getTotalLines() == 1 && state->getLine(0).empty()) {
-            toPrint += "      --file buffer is empty--";
-        }
-        updateStatus(toPrint);
-    } else if (model.getMode() == INSERT_MODE) {
-        std::string label = "-- INSERT MODE --";
-        updateStatus(label);
-    }*/
     repositionCursor(state);
 }
 

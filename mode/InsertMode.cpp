@@ -1,6 +1,5 @@
 #include "InsertMode.h"
 #include "../model/VMModel.h"
-#include "../utility/FileManager.h"
 
 VM::InsertMode::InsertMode(VM::VMModel &model) : Mode(model), enterAtEnd{false}, replaceMode{false}, lastCalledWithCount{1} {}
 

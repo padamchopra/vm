@@ -124,7 +124,6 @@ void VM::VMModel::setCurrentState(size_t i) {
     if (i < 0) i = 0;
     currentState = i;
     WindowState *state = getActiveState();
-    updateView(state);
 
     if (!state->getFileName().empty() && state->isOriginalFile()) {
         std::string toPrint = "\"" + state->getFileName() + "\"";
@@ -135,6 +134,7 @@ void VM::VMModel::setCurrentState(size_t i) {
     } else if (state->getFileName().empty()) {
         updateStatus("");
     }
+    updateView(state);
 }
 
 void VM::VMModel::updateStatus(const std::string &message) {
