@@ -84,7 +84,6 @@ void VM::InsertMode::makeExitPreparations() {
     lastCalledWithCount = 1;
     enterAtEnd = false;
     replaceMode = false;
-    //TODO: change
     model.updateStatus("");
 }
 
@@ -134,7 +133,7 @@ void VM::InsertMode::handleCharacterPrint(int key) {
     if (line.empty()) {
         line = c;
     } else {
-        if (cursor.second < line.length()) {
+        if (cursor.second < (int) line.length()) {
             if (replaceMode) {
                 std::string cInString;
                 line.replace(cursor.second, 1, cInString + c);

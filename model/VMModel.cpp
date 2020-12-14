@@ -29,7 +29,7 @@ VM::VMModel::VMModel(int fileCount, char *fileNames[]): Model{} {
     if (fileCount == 0) {
         addState("");
     } else {
-        for (size_t i = 0; i < fileCount; ++i) {
+        for (int i = 0; i < fileCount; ++i) {
             std::string fileName = fileNames[i+1];
             addState(fileName);
         }
@@ -95,7 +95,7 @@ void VM::VMModel::stopRecordingSequence() {
     bool alreadyExists = false;
     try {
         lines = FileManager::readFromFile(FileManager::macrosFile);
-        for (int i = 0; i < lines.size(); i = i + 2) {
+        for (size_t i = 0; i < lines.size(); i = i + 2) {
             if (lines.at(i) == recordingName) {
                 lines[i + 1] = macroLine;
                 alreadyExists = true;
@@ -165,7 +165,7 @@ const std::vector<int> &VM::VMModel::getInput() {
 
 void VM::VMModel::partlyEraseRecordingSequence(const std::vector<int> &seq) {
     if (recording) {
-        for (int i = 0; i< seq.size(); ++i){
+        for (size_t i = 0; i< seq.size(); ++i){
             if (!recordingSequence.empty()) {
                 recordingSequence.pop_back();
             }

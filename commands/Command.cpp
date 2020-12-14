@@ -1,6 +1,7 @@
 #include "Command.h"
 #include "../model/VMModel.h"
 #include "../mode/NormalMode.h"
+#include <algorithm>
 
 VM::Command::Command() : undoable(true), countable(true), recordable(true), dottable{true} {}
 

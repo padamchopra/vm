@@ -11,7 +11,7 @@ VM::MacroInfo::MacroInfo(VM::VMModel &model, const std::string &name) : name{nam
         bool exists = false;
         lines = FileManager::readFromFile(FileManager::macrosFile);
         std::string macroLine;
-        for (int i = 0; i < lines.size(); i = i + 2) {
+        for (size_t i = 0; i < lines.size(); i = i + 2) {
             if (lines.at(i) == name) {
                 macroLine = lines.at(i + 1);
                 exists = true;
@@ -23,7 +23,7 @@ VM::MacroInfo::MacroInfo(VM::VMModel &model, const std::string &name) : name{nam
         } else {
             sequence.clear();
             std::string intCode;
-            for (int i = 0; i <macroLine.size(); ++i) {
+            for (size_t i = 0; i <macroLine.size(); ++i) {
                 if (macroLine.at(i) == ' ') {
                     sequence.push_back(std::stoi(intCode));
                     intCode = "";
