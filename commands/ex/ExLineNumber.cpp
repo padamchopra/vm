@@ -5,7 +5,7 @@ bool VM::ExLineNumber::isAMatch(const std::vector<int> &inputSequence) {
     if (inputSequence.size() <= 1) {
         return false;
     }
-    for (int i = 0; i < inputSequence.size() - 1; ++i) {
+    for (int i = 0; i < (int) inputSequence.size() - 1; ++i) {
         if (!isdigit((char) inputSequence.at(i))) {
             return false;
         }

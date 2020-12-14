@@ -155,7 +155,7 @@ std::string VM::WindowState::previousState(int times) {
     if (pastTimeline.empty()) {
         message = "Already at oldest change";
     } else {
-        if (times > pastTimeline.size()) times = pastTimeline.size();
+        if (times > (int) pastTimeline.size()) times = pastTimeline.size();
         message = "Back at #" + std::to_string(pastTimeline.size())  + " change; ";
         while (times > 0) {
             auto local = pastTimeline.back();
@@ -179,7 +179,7 @@ std::string VM::WindowState::redoState(int times) {
     if (futureTimeline.empty()) {
         message = "Already at newest change";
     } else {
-        if (times > futureTimeline.size()) times = futureTimeline.size();
+        if (times > (int) futureTimeline.size()) times = futureTimeline.size();
         message = "Redid #" + std::to_string(futureTimeline.size())  + " change; ";
         while (times > 0) {
             auto local = futureTimeline.back();
@@ -208,7 +208,7 @@ void VM::WindowState::revalidateCursorForLine() {
 }
 
 bool VM::WindowState::isFileSaved() const {
-    return lastSavedAt == pastTimeline.size() + 1;
+    return lastSavedAt == (int) pastTimeline.size() + 1;
 }
 
 void VM::WindowState::saveFile(const std::string &newName) {

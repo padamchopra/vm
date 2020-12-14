@@ -16,7 +16,7 @@ bool VM::ExCommand::isAMatch(const std::vector<int> &inputSequence) {
     if (commandSequence.size() > inputSequence.size() - 1) {
         return false;
     } else {
-        int i = 0;
+        size_t i = 0;
         for (; i < commandSequence.size(); ++i) {
             if (commandSequence.at(i) != inputSequence.at(i)) {
                 return false;

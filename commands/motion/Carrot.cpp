@@ -10,7 +10,7 @@ void VM::Carrot::executeFor(VM::VMModel &model, int times) {
     WindowState *state = model.getActiveState();
     std::pair<int, int> cursor = state->getCursor();
     std::string line = state->getLine(cursor.first);
-    for (int i = 0; i < line.length(); ++i) {
+    for (size_t i = 0; i < line.length(); ++i) {
         if (line.at(i) != ' ') {
             cursor.second = i;
             break;

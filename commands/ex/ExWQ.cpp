@@ -9,7 +9,7 @@ VM::ExWQ::ExWQ() {
 void VM::ExWQ::executeFor(VM::VMModel &model, const std::string &inputSequence) {
     WindowState *state = model.getActiveState();
     std::string newFileName;
-    for (int i = 2; i < inputSequence.length(); ++i) {
+    for (size_t i = 2; i < inputSequence.length(); ++i) {
         if (inputSequence.at(i) != ' ') {
             newFileName = inputSequence.substr(i);
             break;

@@ -29,7 +29,7 @@ bool VM::W::executeOnce(VM::VMModel &model) {
     std::pair<int, int> cursor = state->getCursor();
     std::string line = state->getLine(cursor.first);
     int pos = cursor.second + line.substr(cursor.second).find(' ');
-    if (pos == cursor.second + std::string::npos || pos == line.length() - 1) { //not found or last char is ' '
+    if (pos == cursor.second + (int) std::string::npos || pos == (int) line.length() - 1) { //not found or last char is ' '
         if (cursor.first != state->getTotalLines() - 1) { //if not last line, move to next line and search again
             state->moveCursor(DOWN, model.getController());
             cursor = state->getCursor();

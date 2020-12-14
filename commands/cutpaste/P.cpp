@@ -80,7 +80,7 @@ void VM::P::executeOnceForAll(VM::VMModel &model, const std::vector<std::string>
             remainingFirstLine = firstLine.substr(1);
             firstLine = firstLine.substr(0, 1);
         }
-    } else if (cursor.second == firstLine.length() - 1){
+    } else if (cursor.second == (int) firstLine.length() - 1){
         if (beforeCursor) {
             remainingFirstLine = firstLine.substr(firstLine.length() - 1);
             firstLine = firstLine.substr(0, firstLine.length() - 1);
@@ -102,7 +102,7 @@ void VM::P::executeOnceForAll(VM::VMModel &model, const std::vector<std::string>
     } else {
         state->setLine(cursor.first, firstLine + lines.at(0));
         state->setCursor({cursor.first, 0});
-        for (int i = 1; i < lines.size() - 1; ++i) { //leave last line
+        for (int i = 1; i < (int) lines.size() - 1; ++i) { //leave last line
             state->addLine(state->getCursor().first + 1, lines.at(i));
             state->moveCursor(DOWN, model.getController());
         }
