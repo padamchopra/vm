@@ -8,7 +8,13 @@ void VM::TerminalView::updateView(WindowState *state) {
     int rowOffset = state->getOffset();
     std::pair<int, int> screenSize = terminal->getWindowSize(FILEWINDOW);
     std::pair<int, int> cursor = state->getCursor();
-    std::string cursorInformation = "[" + std::to_string(cursor.first + 1) + ", " + std::to_string(cursor.second + 1) + "]";
+    int lineLength = state->getLine(cursor.first).length();
+    std::string cursorInformation = "[" + std::to_string(cursor.first + 1) + ", ";
+    if (lineLength == 0) {
+        cursorInformation += "0-1]";
+    } else {
+        cursorInformation +=  std::to_string(cursor.second + 1) + "]";
+    }
     terminal->moveCursorInTerminal(STATUSBAR, {0, terminal->getWindowSize(STATUSBAR).second - cursorInformation.length() - 5});
     terminal->printString(STATUSBAR, cursorInformation);
     terminal->moveCursorInTerminal(FILEWINDOW, {0, 0});

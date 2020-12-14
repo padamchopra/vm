@@ -19,6 +19,9 @@ VM::WindowState::WindowState() {
 VM::WindowState::WindowState(const std::string& fileName) : fileName(fileName) {
     try {
         lines = FileManager::readFromFile(fileName);
+        if (lines.empty()) {
+            lines.emplace_back("");
+        }
     } catch (...) {
         FileManager::createFile(fileName);
     }
