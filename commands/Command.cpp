@@ -3,7 +3,7 @@
 #include "../mode/NormalMode.h"
 #include <algorithm>
 
-VM::Command::Command() : undoable(true), countable(true), recordable(true), dottable{true} {}
+VM::Command::Command() : undoable(true), countable(true), recordable(true) {}
 
 void VM::Command::execute(VM::VMModel &model, int times) {
     if (undoable && !model.isPlaying()) {
@@ -43,10 +43,10 @@ int VM::Command::isAMatch(const std::vector<int> &inputSequence) {
     } else return 0;
 }
 
-bool VM::Command::isDottable() const {
-    return dottable;
-}
-
 bool VM::Command::isRecordable() const {
     return recordable;
+}
+
+bool VM::Command::isUndoable() const {
+    return undoable;
 }

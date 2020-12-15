@@ -11,7 +11,6 @@ namespace VM {
     public:
         MacroCommand() {
             undoable = false;
-            dottable = false;
         };
         ~MacroCommand() override = default;
     };

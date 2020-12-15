@@ -30,6 +30,12 @@ namespace VM {
             terminal->printString(STATUSBAR, message);
             terminal->moveCursorInTerminal(FILEWINDOW, prevPosition);
         }
+
+        void updateStatusWithError(const std::string &message) {
+            terminal->startErrorOutput(STATUSBAR);
+            updateStatus(message);
+            terminal->stopErrorOutput(STATUSBAR);
+        }
     };
 }
 

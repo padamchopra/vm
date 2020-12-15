@@ -7,5 +7,5 @@ VM::ExQExclamation::ExQExclamation() {
 }
 
 void VM::ExQExclamation::executeFor(VM::VMModel &model, const std::string &inputSequence) {
-    model.stop();
+    model.removeActiveState();
 }

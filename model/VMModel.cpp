@@ -9,6 +9,7 @@
 void VM::VMModel::initialise() {
     currentState = 0;
     currentMode = 0;
+    std::shared_ptr<Terminal> terminal = std::make_shared<Terminal>();
     controller = std::make_unique<TerminalController>(terminal);
     addView(new TerminalView(terminal));
     modes.emplace_back(std::make_unique<NormalMode>(*this));
@@ -25,15 +26,24 @@ void VM::VMModel::addState(const std::string &fileName) {
 }
 
 VM::VMModel::VMModel(int fileCount, char *fileNames[]): Model{} {
-    initialise();
+    enhanced = false;
     if (fileCount == 0) {
         addState("");
     } else {
         for (int i = 0; i < fileCount; ++i) {
             std::string fileName = fileNames[i+1];
-            addState(fileName);
+            FileManager::log(fileName);
+            if (fileName == "-enhanced") {
+                enhanced = true;
+            } else {
+                addState(fileName);
+            }
+        }
+        if (fileCount == 1 && enhanced) {
+            addState("");
         }
     }
+    initialise();
 }
 
 void VM::VMModel::start() {
@@ -139,7 +149,7 @@ void VM::VMModel::setCurrentState(size_t i) {
 
 void VM::VMModel::updateStatus(const std::string &message) {
     if (recording) {
-        Model::updateStatus(message + " -- recording @" + recordingName + " --");
+        Model::updateStatus(message + " recording @" + recordingName + " ");
     } else {
         Model::updateStatus(message);
     }
@@ -207,5 +217,18 @@ size_t VM::VMModel::getCurrentState() const {
 
 const std::string &VM::VMModel::getLastPlayedMacro() const {
     return lastPlayedMacro;
+}
+
+bool VM::VMModel::isEnhanced() const {
+    return enhanced;
+}
+
+void VM::VMModel::removeActiveState() {
+    if (states.size() > 1) {
+        states.erase(states.begin() + currentState);
+        currentState = 0;
+    } else {
+        stop();
+    }
 }
 

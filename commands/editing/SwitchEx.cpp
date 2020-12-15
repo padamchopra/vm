@@ -3,7 +3,6 @@
 #include "../../controller/TerminalController.h"
 
 void VM::SwitchEx::executeFor(VM::VMModel &model, int times) {
-    dottable = false;
     model.changeMode(EX_MODE);
 }
 

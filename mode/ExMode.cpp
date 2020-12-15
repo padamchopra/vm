@@ -12,6 +12,7 @@
 #include "../commands/ex/ExN.h"
 #include "../commands/ex/ExPrev.h"
 #include "../commands/ex/ExAuth.h"
+#include "../commands/ex/ExE.h"
 
 void VM::ExMode::constructCommands() {
     commands.push_back(std::make_unique<ExW>());
@@ -22,9 +23,12 @@ void VM::ExMode::constructCommands() {
     commands.push_back(std::make_unique<ExZero>());
     commands.push_back(std::make_unique<ExDollar>());
     commands.push_back(std::make_unique<ExLineNumber>());
-    commands.push_back(std::make_unique<ExN>());
-    commands.push_back(std::make_unique<ExPrev>());
-    commands.push_back(std::make_unique<ExAuth>());
+    if (model.isEnhanced()) {
+        commands.push_back(std::make_unique<ExE>());
+        commands.push_back(std::make_unique<ExN>());
+        commands.push_back(std::make_unique<ExPrev>());
+        commands.push_back(std::make_unique<ExAuth>());
+    }
 }
 
 VM::ExMode::ExMode(VM::VMModel &model) : Mode(model) {

@@ -26,6 +26,6 @@ void VM::ExWQ::executeFor(VM::VMModel &model, const std::string &inputSequence) 
         std::string message = "\"" + newFileName + "\"" + " ";
         message += std::to_string(info.first) + "L, " + std::to_string(info.second) + "C written";
         model.updateStatus(message);
-        model.stop();
+        model.removeActiveState();
     }
 }

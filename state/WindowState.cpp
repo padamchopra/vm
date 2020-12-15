@@ -4,6 +4,9 @@
 #include "../controller/TerminalController.h"
 
 void VM::WindowState::initialise() {
+    if (lines.empty()) {
+        lines.emplace_back("");
+    }
     lastSavedAt = 1;
     offset = 0;
     cursor.first = 0;
@@ -12,16 +15,12 @@ void VM::WindowState::initialise() {
 
 VM::WindowState::WindowState() {
     fileName = "";
-    lines.emplace_back("");
     initialise();
 }
 
 VM::WindowState::WindowState(const std::string& fileName) : fileName(fileName) {
     try {
         lines = FileManager::readFromFile(fileName);
-        if (lines.empty()) {
-            lines.emplace_back("");
-        }
     } catch (...) {
         FileManager::createFile(fileName);
     }

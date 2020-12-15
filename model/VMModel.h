@@ -12,6 +12,7 @@ namespace VM {
 
     class VMModel: public Model {
     private:
+        bool enhanced;
         size_t currentState;
         size_t currentMode;
         std::vector<std::unique_ptr<WindowState>> states;
@@ -25,14 +26,13 @@ namespace VM {
         bool recording;
         bool playing;
         void initialise();
-        void addState(const std::string &fileName);
         void handleInteractions();
         void signalMacroInfoDestruction();
+        void stop();
 
     public:
         VMModel(int fileCount, char *fileNames[]);
         void start();
-        void stop();
         void setCurrentState(size_t currentState);
         size_t getCurrentState() const;
         WindowState *getActiveState() const;
@@ -47,10 +47,11 @@ namespace VM {
         void playMacro(const std::string &name);
         bool isRecording() const;
         bool isPlaying() const;
-
         const std::string &getLastPlayedMacro() const;
-
         void partlyEraseRecordingSequence(const std::vector<int> &seq);
+        bool isEnhanced() const;
+        void addState(const std::string &fileName);
+        void removeActiveState();
     };
 }
 

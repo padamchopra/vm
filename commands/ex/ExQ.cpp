@@ -8,7 +8,7 @@ VM::ExQ::ExQ() {
 void VM::ExQ::executeFor(VM::VMModel &model, const std::string &inputSequence) {
     WindowState *state = model.getActiveState();
     if (state->isFileSaved()) {
-        model.stop();
+        model.removeActiveState();
     } else {
         model.updateStatusWithError("No write since last change (add ! to override)");
     }

@@ -15,7 +15,8 @@ void VM::TerminalView::updateView(WindowState *state) {
     } else {
         cursorInformation +=  std::to_string(cursor.second + 1) + "]";
     }
-    terminal->moveCursorInTerminal(STATUSBAR, {0, terminal->getWindowSize(STATUSBAR).second - cursorInformation.length() - 5});
+    cursorInformation = "    " + cursorInformation + "    ";
+    terminal->moveCursorInTerminal(STATUSBAR, {0, terminal->getWindowSize(STATUSBAR).second - cursorInformation.length()});
     terminal->printString(STATUSBAR, cursorInformation);
     terminal->moveCursorInTerminal(FILEWINDOW, {0, 0});
     int rowsPrinted = 0;

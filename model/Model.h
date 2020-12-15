@@ -5,7 +5,6 @@
 #include <vector>
 #include <string>
 #include <memory>
-#include "../utility/Terminal.h"
 #include "../view/View.h"
 #include "../controller/Controller.h"
 #include "../state/WindowState.h"
@@ -18,7 +17,6 @@ namespace VM {
 
     protected:
         std::unique_ptr<Controller> controller;
-        std::shared_ptr<Terminal> terminal;
         void addView(View *view);
 
     public:

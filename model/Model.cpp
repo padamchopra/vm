@@ -2,7 +2,6 @@
 
 VM::Model::Model() {
     currentView = 0;
-    terminal = std::make_shared<Terminal>();
 }
 
 void VM::Model::addView(View *view) {
@@ -22,7 +21,5 @@ const std::vector<int> &VM::Model::getInput() {
 }
 
 void VM::Model::updateStatusWithError(const std::string &message) {
-    terminal->startErrorOutput(STATUSBAR);
-    updateStatus(message);
-    terminal->stopErrorOutput(STATUSBAR);
+    views.at(currentView)->updateStatusWithError(message);
 }

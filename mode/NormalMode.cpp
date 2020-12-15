@@ -98,7 +98,7 @@ void VM::NormalMode::parseInputSequence(const std::vector<int> &inputSequence) {
     for (const auto &command : commands) {
         int count = command->isAMatch(inputSequence);
         if (count != 0) {
-            if (command->isDottable()) {
+            if (command->isUndoable()) {
                 lastCommandRun = command.get();
                 lastInputSequenceBeforeCommandRun = inputSequence;
             }

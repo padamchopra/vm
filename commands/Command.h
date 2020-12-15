@@ -16,7 +16,6 @@ namespace VM {
         bool undoable;
         bool countable;
         bool recordable;
-        bool dottable;
         std::vector<int> commandSequence;
 
     public:
@@ -24,8 +23,7 @@ namespace VM {
         virtual ~Command() = default;
         virtual int isAMatch(const std::vector<int> &inputSequence);
         virtual void execute(VMModel &model, int times);
-        bool isDottable() const;
-
+        bool isUndoable() const;
         bool isRecordable() const;
     };
 }

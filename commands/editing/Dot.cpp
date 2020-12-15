@@ -28,6 +28,5 @@ void VM::Dot::executeFor(VM::VMModel &model, int times) {
 
 VM::Dot::Dot() {
     undoable = false;
-    dottable = false;
     commandSequence.push_back('.');
 }

@@ -12,7 +12,6 @@ namespace VM {
     public:
         MotionCommand() {
             undoable = false;
-            dottable = false;
         };
         ~MotionCommand() override = default;
     };
